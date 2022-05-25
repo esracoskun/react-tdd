@@ -28412,15 +28412,29 @@ function RestaurantListPage() {
       restaurantNames = _useState2[0],
       setRestaurantNames = _useState2[1];
 
+  var _useState3 = (0, _react.useState)(false),
+      _useState4 = _slicedToArray(_useState3, 2),
+      showNewRestaurantForm = _useState4[0],
+      setShowNewRestaurantForm = _useState4[1];
+
   var handleAddRestaurant = function handleAddRestaurant(newRestaurantName) {
+    setShowNewRestaurantForm(false);
     setRestaurantNames([newRestaurantName].concat(_toConsumableArray(restaurantNames)));
   };
 
+  var handleShowNewRestaurantForm = function handleShowNewRestaurantForm() {
+    setShowNewRestaurantForm(true);
+  };
+
+  console.log({
+    showNewRestaurantForm: showNewRestaurantForm
+  });
   return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("button", {
-    "data-test": "addRestaurantButton"
-  }, "Add Restaurant"), /*#__PURE__*/_react.default.createElement(_NewRestaurantForm.default, {
+    "data-test": "addRestaurantButton",
+    onClick: handleShowNewRestaurantForm
+  }, "Add Restaurant"), showNewRestaurantForm ? /*#__PURE__*/_react.default.createElement(_NewRestaurantForm.default, {
     onSave: handleAddRestaurant
-  }), /*#__PURE__*/_react.default.createElement(_RestaurantList.default, {
+  }) : null, /*#__PURE__*/_react.default.createElement(_RestaurantList.default, {
     restaurantNames: restaurantNames
   }));
 }
@@ -28482,7 +28496,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63328" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63768" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
