@@ -35150,7 +35150,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var RestaurantList = function RestaurantList(_ref) {
   var restaurantNames = _ref.restaurantNames;
-  return /*#__PURE__*/_react.default.createElement(_reactMaterialize.Collection, null, restaurantNames.map(function (restaurantName) {
+  return /*#__PURE__*/_react.default.createElement(_reactMaterialize.Collection, {
+    header: "Restaurants"
+  }, restaurantNames.length === 0 ? /*#__PURE__*/_react.default.createElement(_reactMaterialize.CollectionItem, {
+    style: {
+      color: 'gray'
+    }
+  }, "(Non added Yet)") : restaurantNames.map(function (restaurantName) {
     return /*#__PURE__*/_react.default.createElement(_reactMaterialize.CollectionItem, {
       key: restaurantName
     }, restaurantName);

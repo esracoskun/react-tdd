@@ -5,18 +5,23 @@ import {
   CollectionItem
 } from "react-materialize";
 
-const RestaurantList = ({ restaurantNames }) => {
-  return (
-    <Collection>
-      {
+const RestaurantList = ({ restaurantNames }) => (
+  <Collection header="Restaurants">
+    {
+      restaurantNames.length === 0 ? (
+          <CollectionItem style={{ color: 'gray' }}>
+            (Non added Yet)
+          </CollectionItem>
+      ) : (
         restaurantNames.map(restaurantName => (
           <CollectionItem key={restaurantName}>
             {restaurantName}
           </CollectionItem>
         ))
-      }
-    </Collection>
-  )
-}
+      )
+    }
+  </Collection>
+
+)
 
 export default RestaurantList;
