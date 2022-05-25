@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Button, Input } from 'react-materialize';
 
 export default function NewRestaurantForm({onSave}) {
   const [inputText, setInputText] = useState('');
@@ -13,16 +14,16 @@ export default function NewRestaurantForm({onSave}) {
 
   return (
     <div>
-      <input
-        type="text"
+      <Input
+        label='Restaurant Name'
         value={inputText}
         onChange={handleTextChange}
         data-test="newRestaurantName"
       />
 
-      <button data-test="saveNewRestaurantButton" onClick={handleSave}>
+      <Button data-test="saveNewRestaurantButton" onClick={handleSave}>
         Save
-      </button>
+      </Button>
     </div>
   );
 }

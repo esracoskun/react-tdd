@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Button } from 'react-materialize';
 import NewRestaurantForm from './NewRestaurantForm';
 import RestaurantList from './RestaurantList';
 
@@ -16,12 +17,11 @@ export default function RestaurantListPage() {
     setShowNewRestaurantForm(true);
   }
 
-  console.log({showNewRestaurantForm})
   return (
     <div>
-      <button data-test="addRestaurantButton" onClick={handleShowNewRestaurantForm}>
+      <Button data-test="addRestaurantButton" onClick={handleShowNewRestaurantForm}>
         Add Restaurant
-      </button>
+      </Button>
       {
         showNewRestaurantForm ?
         <NewRestaurantForm
