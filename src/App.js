@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
+import RestaurantListPage from './RestaurantListPage';
 
 export default function App() {
-  const [name, setName] = useState('viewers');
   return (
-    <div className='hello'>Hello, {name}</div>
+    <div>
+      <RestaurantListPage />
+
+    </div>
   );
 }
