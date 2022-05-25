@@ -34604,12 +34604,18 @@ function NewRestaurantForm(_ref) {
     onSave(inputText);
   };
 
-  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_reactMaterialize.Input, {
+  return /*#__PURE__*/_react.default.createElement(_reactMaterialize.Row, null, /*#__PURE__*/_react.default.createElement(_reactMaterialize.Input, {
+    s: 12,
+    m: 8,
+    l: 10,
     label: "Restaurant Name",
     value: inputText,
     onChange: handleTextChange,
     "data-test": "newRestaurantName"
   }), /*#__PURE__*/_react.default.createElement(_reactMaterialize.Button, {
+    s: 12,
+    m: 4,
+    l: 2,
     "data-test": "saveNewRestaurantButton",
     onClick: handleSave
   }, "Save"));
@@ -35215,14 +35221,14 @@ function RestaurantListPage() {
     setShowNewRestaurantForm(true);
   };
 
-  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_reactMaterialize.Button, {
+  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_reactMaterialize.Row, null, /*#__PURE__*/_react.default.createElement(_reactMaterialize.Button, {
     "data-test": "addRestaurantButton",
     onClick: handleShowNewRestaurantForm
-  }, "Add Restaurant"), showNewRestaurantForm ? /*#__PURE__*/_react.default.createElement(_NewRestaurantForm.default, {
+  }, "Add Restaurant")), /*#__PURE__*/_react.default.createElement(_reactMaterialize.Row, null, showNewRestaurantForm ? /*#__PURE__*/_react.default.createElement(_NewRestaurantForm.default, {
     onSave: handleAddRestaurant
-  }) : null, /*#__PURE__*/_react.default.createElement(_RestaurantList.default, {
+  }) : null), /*#__PURE__*/_react.default.createElement(_reactMaterialize.Row, null, /*#__PURE__*/_react.default.createElement(_RestaurantList.default, {
     restaurantNames: restaurantNames
-  }));
+  })));
 }
 },{"react":"node_modules/react/index.js","react-materialize":"node_modules/react-materialize/lib/index.js","./NewRestaurantForm":"src/NewRestaurantForm.js","./RestaurantList":"src/RestaurantList.js"}],"src/App.js":[function(require,module,exports) {
 "use strict";
@@ -35236,12 +35242,19 @@ var _react = _interopRequireDefault(require("react"));
 
 var _RestaurantListPage = _interopRequireDefault(require("./RestaurantListPage"));
 
+var _reactMaterialize = require("react-materialize");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function App() {
-  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_RestaurantListPage.default, null));
+  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_reactMaterialize.Row, null, /*#__PURE__*/_react.default.createElement(_reactMaterialize.Col, {
+    s: 12,
+    m: 10,
+    l: 8,
+    offset: "m1 l2"
+  }, /*#__PURE__*/_react.default.createElement(_RestaurantListPage.default, null))));
 }
-},{"react":"node_modules/react/index.js","./RestaurantListPage":"src/RestaurantListPage.js"}],"src/main.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","./RestaurantListPage":"src/RestaurantListPage.js","react-materialize":"node_modules/react-materialize/lib/index.js"}],"src/main.js":[function(require,module,exports) {
 "use strict";
 
 var _react = _interopRequireDefault(require("react"));
