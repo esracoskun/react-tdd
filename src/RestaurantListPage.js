@@ -8,28 +8,25 @@ import NewRestaurantForm from './NewRestaurantForm';
 import RestaurantList from './RestaurantList';
 
 export default function RestaurantListPage() {
-
   const [restaurantNames, setRestaurantNames] = useState([]);
   const [showNewRestaurantForm, setShowNewRestaurantForm] = useState(false);
 
   const handleAddRestaurant = (newRestaurantName) => {
     setShowNewRestaurantForm(false);
     setRestaurantNames([newRestaurantName, ...restaurantNames]);
-  }
+  };
 
   const handleShowNewRestaurantForm = () => {
     setShowNewRestaurantForm(true);
-  }
+  };
 
   const renderNewRestaurantForm = () => {
-    if (showNewRestaurantForm ) {
-      return (
-        <NewRestaurantForm
-          onSave={handleAddRestaurant}
-        />
-      )
+    if (showNewRestaurantForm) {
+      return (<NewRestaurantForm
+        onSave={handleAddRestaurant}
+      />);
     }
-  }
+  };
 
   return (
     <div>

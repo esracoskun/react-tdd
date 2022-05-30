@@ -2,19 +2,19 @@ import React, { useState } from 'react';
 import {
   Button,
   Input,
-  Row
+  Row,
 } from 'react-materialize';
 
-export default function NewRestaurantForm({onSave}) {
+export default function NewRestaurantForm({ onSave }) {
   const [inputText, setInputText] = useState('');
 
   const handleTextChange = (event) => {
     setInputText(event.target.value);
-  }
+  };
 
   const handleSave = () => {
     onSave(inputText);
-  }
+  };
 
   return (
     <Row>

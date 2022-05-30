@@ -1,6 +1,5 @@
 describe('adding a restaurant', () => {
   it('display the restaurant in the list', () => {
-
     const restaurantName = 'Sushi Place';
 
     cy.visit('http://localhost:1234');
@@ -16,7 +15,6 @@ describe('adding a restaurant', () => {
 
     cy.get('[data-test="saveNewRestaurantButton"]')
       .click();
-
 
     // confirm newRestaurantName field not shown
     cy.get('[data-test="newRestaurantName"]')

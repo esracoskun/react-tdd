@@ -2,7 +2,7 @@ import React from 'react';
 import { dataURLToBlob } from 'blob-util';
 import {
   Collection,
-  CollectionItem
+  CollectionItem,
 } from "react-materialize";
 
 const RestaurantList = ({ restaurantNames }) => (
