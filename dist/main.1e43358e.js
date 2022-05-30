@@ -35152,15 +35152,33 @@ var RestaurantList = function RestaurantList(_ref) {
   var restaurantNames = _ref.restaurantNames;
   return /*#__PURE__*/_react.default.createElement(_reactMaterialize.Collection, {
     header: "Restaurants"
-  }, restaurantNames.length === 0 ? /*#__PURE__*/_react.default.createElement(_reactMaterialize.CollectionItem, {
+  }, /*#__PURE__*/_react.default.createElement(RestaurantItems, {
+    restaurantNames: restaurantNames
+  }));
+};
+
+var RestaurantItems = function RestaurantItems(_ref2) {
+  var restaurantNames = _ref2.restaurantNames;
+  return restaurantNames.length === 0 ? /*#__PURE__*/_react.default.createElement(NoRestaurantItems, null) : /*#__PURE__*/_react.default.createElement(SomeRestaurantList, {
+    restaurantNames: restaurantNames
+  });
+};
+
+var NoRestaurantItems = function NoRestaurantItems() {
+  return /*#__PURE__*/_react.default.createElement(_reactMaterialize.CollectionItem, {
     style: {
       color: 'gray'
     }
-  }, "(Non added Yet)") : restaurantNames.map(function (restaurantName) {
+  }, "(Non added Yet)");
+};
+
+var SomeRestaurantList = function SomeRestaurantList(_ref3) {
+  var restaurantNames = _ref3.restaurantNames;
+  return restaurantNames.map(function (restaurantName) {
     return /*#__PURE__*/_react.default.createElement(_reactMaterialize.CollectionItem, {
       key: restaurantName
     }, restaurantName);
-  }));
+  });
 };
 
 var _default = RestaurantList;
@@ -35227,12 +35245,18 @@ function RestaurantListPage() {
     setShowNewRestaurantForm(true);
   };
 
+  var renderNewRestaurantForm = function renderNewRestaurantForm() {
+    if (showNewRestaurantForm) {
+      return /*#__PURE__*/_react.default.createElement(_NewRestaurantForm.default, {
+        onSave: handleAddRestaurant
+      });
+    }
+  };
+
   return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_reactMaterialize.Row, null, /*#__PURE__*/_react.default.createElement(_reactMaterialize.Button, {
     "data-test": "addRestaurantButton",
     onClick: handleShowNewRestaurantForm
-  }, "Add Restaurant")), /*#__PURE__*/_react.default.createElement(_reactMaterialize.Row, null, showNewRestaurantForm ? /*#__PURE__*/_react.default.createElement(_NewRestaurantForm.default, {
-    onSave: handleAddRestaurant
-  }) : null), /*#__PURE__*/_react.default.createElement(_reactMaterialize.Row, null, /*#__PURE__*/_react.default.createElement(_RestaurantList.default, {
+  }, "Add Restaurant")), /*#__PURE__*/_react.default.createElement(_reactMaterialize.Row, null, renderNewRestaurantForm()), /*#__PURE__*/_react.default.createElement(_reactMaterialize.Row, null, /*#__PURE__*/_react.default.createElement(_RestaurantList.default, {
     restaurantNames: restaurantNames
   })));
 }
@@ -35253,12 +35277,12 @@ var _reactMaterialize = require("react-materialize");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function App() {
-  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_reactMaterialize.Row, null, /*#__PURE__*/_react.default.createElement(_reactMaterialize.Col, {
+  return /*#__PURE__*/_react.default.createElement(_reactMaterialize.Row, null, /*#__PURE__*/_react.default.createElement(_reactMaterialize.Col, {
     s: 12,
     m: 10,
     l: 8,
     offset: "m1 l2"
-  }, /*#__PURE__*/_react.default.createElement(_RestaurantListPage.default, null))));
+  }, /*#__PURE__*/_react.default.createElement(_RestaurantListPage.default, null)));
 }
 },{"react":"node_modules/react/index.js","./RestaurantListPage":"src/RestaurantListPage.js","react-materialize":"node_modules/react-materialize/lib/index.js"}],"src/main.js":[function(require,module,exports) {
 "use strict";
@@ -35301,7 +35325,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49483" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57320" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

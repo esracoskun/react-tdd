@@ -21,6 +21,16 @@ export default function RestaurantListPage() {
     setShowNewRestaurantForm(true);
   }
 
+  const renderNewRestaurantForm = () => {
+    if (showNewRestaurantForm ) {
+      return (
+        <NewRestaurantForm
+          onSave={handleAddRestaurant}
+        />
+      )
+    }
+  }
+
   return (
     <div>
       <Row>
@@ -29,13 +39,7 @@ export default function RestaurantListPage() {
         </Button>
       </Row>
       <Row>
-        {
-          showNewRestaurantForm ?
-          <NewRestaurantForm
-            onSave={handleAddRestaurant}
-          />
-          : null
-        }
+        { renderNewRestaurantForm() }
       </Row>
       <Row>
         <RestaurantList restaurantNames={restaurantNames}/>

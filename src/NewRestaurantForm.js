@@ -19,9 +19,7 @@ export default function NewRestaurantForm({onSave}) {
   return (
     <Row>
       <Input
-        s={12}
-        m={8}
-        l={10}
+        s={12} m={8} l={10}
         label='Restaurant Name'
         value={inputText}
         onChange={handleTextChange}
