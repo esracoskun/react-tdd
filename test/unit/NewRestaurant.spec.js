@@ -10,15 +10,20 @@ describe('NewRestaurantForm', () => {
     beforeEach(() => {
       saveHandler = jest.fn();
 
-      wrapper =mount(<NewRestaurantForm onSave={saveHandler}/>);
+      wrapper = mount(<NewRestaurantForm onSave={saveHandler}/>);
 
       wrapper
         .find('input[data-test="newRestaurantName"]')
-        .simulate('change', { target: { value: 'Sushi Place' } });
+        .simulate('change', {
+          target: {
+            name: 'restaurantName',
+            value: 'Sushi Place'
+          }
+        });
 
       wrapper
-        .find('button[data-test="saveNewRestaurantButton"]')
-        .simulate('click');
+        .find('form')
+        .simulate('submit');
     });
 
     it('calls the onSave handler', () => {
