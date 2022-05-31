@@ -8,7 +8,8 @@ describe('adding a restaurant', () => {
     // modal allows adding restaurant
     modalNotShownAtTheStart();
     modalCanBeCancelled();
-    // modalDisplaysValidationErrors();
+    modalDisplaysValidationErrors();
+    modalClearsOutValidationErrorsWhenClosed();
     modalAllowsAddingRestaurant(restaurantName);
   });
 
@@ -58,5 +59,25 @@ describe('adding a restaurant', () => {
       .should('not.be.visible');
 
     cy.contains(restaurantName);
+  }
+
+  function modalClearsOutValidationErrorsWhenClosed() {
+    cy.get('[data-test="addRestaurantButton"]')
+      .click();
+
+    cy.get('[data-test="saveNewRestaurantButton"]')
+      .click();
+
+    cy.get('[data-test="addRestaurantModal"] button.modal-close')
+      .click();
+
+    cy.get('[data-test="addRestaurantButton"]')
+      .click();
+
+    cy.get('label[for="restaurantName"][data-error="Cannot be blank"]')
+      .should("not.be.visible");
+
+    cy.get('[data-test="addRestaurantModal"] button.modal-close')
+      .click();
   }
 });
