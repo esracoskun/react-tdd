@@ -41,12 +41,16 @@ export default function RestaurantListPage() {
         header="New Restaurant"
         trigger={
           <Button
-            data-test="addRestaurantButton"
-            // onClick={handleShowNewRestaurantForm}
+          data-test="addRestaurantButton"
+          // onClick={handleShowNewRestaurantForm}
           >
             Add Restaurant
           </Button>
-        } >
+        }
+        // actions={[
+        //   <Button flat modal="close" node="button" waves="green">Close</Button>
+        // ]}
+        >
         <NewRestaurantForm onSave={handleAddRestaurant}/>
       </Modal>
       <Row>

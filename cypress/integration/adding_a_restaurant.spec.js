@@ -7,7 +7,7 @@ describe('adding a restaurant', () => {
 
     // modal not shown at the start
     cy.get('[data-test="newRestaurantName"]')
-      .should('not.exist');
+      .should('not.be.visible');
 
     // modal can be cancelled
     cy.get('[data-test="addRestaurantButton"]')
@@ -18,10 +18,13 @@ describe('adding a restaurant', () => {
 
     // modal allows adding restaurant
     cy.get('[data-test="newRestaurantName"]')
-      .should('not.exist');
+      .should('not.be.visible');
 
     cy.get('[data-test="addRestaurantButton"]')
       .click();
+
+    // modal focuses on text field when appears
+    cy.get('[data-test="newRestaurantName"]').focus();
 
     cy.get('[data-test="newRestaurantName"]')
       .type(restaurantName);
@@ -32,7 +35,7 @@ describe('adding a restaurant', () => {
 
     // confirm newRestaurantName field not shown
     cy.get('[data-test="newRestaurantName"]')
-      .should('not.exist');
+      .should('not.be.visible');
 
     cy.contains(restaurantName);
   });
