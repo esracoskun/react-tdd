@@ -35252,6 +35252,7 @@ function RestaurantListPage() {
 
   return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_reactMaterialize.Modal, {
     id: "addRestaurantModal",
+    "data-test": "addRestaurantModal",
     header: "New Restaurant",
     trigger: /*#__PURE__*/_react.default.createElement(_reactMaterialize.Button, {
       "data-test": "addRestaurantButton" // onClick={handleShowNewRestaurantForm}
