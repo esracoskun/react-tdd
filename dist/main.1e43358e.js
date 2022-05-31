@@ -41436,13 +41436,25 @@ function NewRestaurantForm(_ref) {
     resetForm();
   };
 
+  var validate = function validate(values) {
+    var errors = {};
+
+    if (values.restaurantName === '') {
+      errors.restaurantName = 'Cannot be blank';
+    }
+
+    return errors;
+  };
+
   return /*#__PURE__*/_react.default.createElement(_reactMaterialize.Row, null, /*#__PURE__*/_react.default.createElement(_formik.Formik, {
     initialValues: {
       restaurantName: ''
     },
-    onSubmit: handleSave
+    onSubmit: handleSave,
+    validate: validate
   }, function (_ref3) {
     var values = _ref3.values,
+        errors = _ref3.errors,
         handleChange = _ref3.handleChange,
         handleSubmit = _ref3.handleSubmit;
     return /*#__PURE__*/_react.default.createElement("form", {
@@ -41453,6 +41465,8 @@ function NewRestaurantForm(_ref) {
       l: 10,
       label: "Restaurant Name",
       id: "restaurantName",
+      name: "restaurantName",
+      error: errors.restaurantName,
       value: values.restaurantName,
       onChange: handleChange,
       "data-test": "newRestaurantName",

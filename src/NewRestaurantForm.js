@@ -21,17 +21,31 @@ export default function NewRestaurantForm({onSave}) {
     resetForm();
   }
 
+  const validate = (values) => {
+    let errors = {};
+
+    if (values.restaurantName === '') {
+      errors.restaurantName = 'Cannot be blank';
+    }
+
+    return errors;
+  }
+
   return (
     <Row>
       <Formik
         initialValues={{ restaurantName: '' }}
-        onSubmit={handleSave}>
-        {({ values, handleChange, handleSubmit }) => (
+        onSubmit={handleSave}
+        validate={validate}
+        >
+        {({ values, errors, handleChange, handleSubmit }) => (
           <form onSubmit={handleSubmit}>
             <Input
               s={12} m={8} l={10}
-              label='Restaurant Name'
+              label="Restaurant Name"
               id="restaurantName"
+              name="restaurantName"
+              error={errors.restaurantName}
               value={values.restaurantName}
               onChange={handleChange}
               data-test="newRestaurantName"
