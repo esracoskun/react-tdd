@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   Button,
   Input,
@@ -6,6 +6,14 @@ import {
 } from 'react-materialize';
 
 export default function NewRestaurantForm({onSave}) {
+  const nameInput = useRef(null);
+
+  useEffect(() => {
+    if (nameInput.current.input) {
+      nameInput.current.input.focus();
+    }
+  }, []);
+
   const [inputText, setInputText] = useState('');
 
   const handleTextChange = (event) => {
@@ -14,6 +22,7 @@ export default function NewRestaurantForm({onSave}) {
 
   const handleSave = () => {
     onSave(inputText);
+    setInputText('');
   }
 
   return (
@@ -24,6 +33,7 @@ export default function NewRestaurantForm({onSave}) {
         value={inputText}
         onChange={handleTextChange}
         data-test="newRestaurantName"
+        ref={nameInput}
       />
 
       <Button s={12} m={4} l={2} data-test="saveNewRestaurantButton" onClick={handleSave}>

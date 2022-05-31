@@ -34590,6 +34590,12 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 function NewRestaurantForm(_ref) {
   var onSave = _ref.onSave;
+  var nameInput = (0, _react.useRef)(null);
+  (0, _react.useEffect)(function () {
+    if (nameInput.current.input) {
+      nameInput.current.input.focus();
+    }
+  }, []);
 
   var _useState = (0, _react.useState)(''),
       _useState2 = _slicedToArray(_useState, 2),
@@ -34602,6 +34608,7 @@ function NewRestaurantForm(_ref) {
 
   var handleSave = function handleSave() {
     onSave(inputText);
+    setInputText('');
   };
 
   return /*#__PURE__*/_react.default.createElement(_reactMaterialize.Row, null, /*#__PURE__*/_react.default.createElement(_reactMaterialize.Input, {
@@ -34611,7 +34618,8 @@ function NewRestaurantForm(_ref) {
     label: "Restaurant Name",
     value: inputText,
     onChange: handleTextChange,
-    "data-test": "newRestaurantName"
+    "data-test": "newRestaurantName",
+    ref: nameInput
   }), /*#__PURE__*/_react.default.createElement(_reactMaterialize.Button, {
     s: 12,
     m: 4,
@@ -35252,6 +35260,7 @@ function RestaurantListPage() {
 
   return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_reactMaterialize.Modal, {
     id: "addRestaurantModal",
+    "data-test": "addRestaurantModal",
     header: "New Restaurant",
     trigger: /*#__PURE__*/_react.default.createElement(_reactMaterialize.Button, {
       "data-test": "addRestaurantButton" // onClick={handleShowNewRestaurantForm}
@@ -35328,7 +35337,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60132" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61494" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -37,31 +37,19 @@ export default function RestaurantListPage() {
     <div>
       <Modal
         id="addRestaurantModal"
+        data-test="addRestaurantModal"
         header="New Restaurant"
         trigger={
           <Button
-            data-test="addRestaurantButton"
-            // onClick={handleShowNewRestaurantForm}
+          data-test="addRestaurantButton"
+          // onClick={handleShowNewRestaurantForm}
           >
             Add Restaurant
           </Button>
-        } >
+        }
+        >
         <NewRestaurantForm onSave={handleAddRestaurant}/>
       </Modal>
-      {/* <Row>
-        <Button data-test="addRestaurantButton" onClick={handleShowNewRestaurantForm}>
-          Add Restaurant
-        </Button>
-      </Row>
-      <Row>
-        {
-          showNewRestaurantForm ?
-          <NewRestaurantForm
-            onSave={handleAddRestaurant}
-          />
-          : null
-        }
-      </Row> */}
       <Row>
         <RestaurantList restaurantNames={restaurantNames}/>
       </Row>
