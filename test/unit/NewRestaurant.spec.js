@@ -1,44 +1,39 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { render, wait, fireEvent, cleanup } from 'react-testing-library';
 import NewRestaurantForm from '../../src/NewRestaurantForm';
 
 describe('NewRestaurantForm', () => {
   describe('clicking the save button', () => {
     let saveHandler;
-    let wrapper;
+    let getByTestId;
 
     beforeEach(() => {
       saveHandler = jest.fn();
 
-      wrapper = mount(<NewRestaurantForm onSave={saveHandler}/>);
+      ({ getByTestId } = render(<NewRestaurantForm onSave={saveHandler} />));
 
-      wrapper
-        .find('input[data-test="newRestaurantName"]')
-        .simulate('change', {
+      fireEvent.change(
+        getByTestId('newRestaurantName'),
+        {
           target: {
-            name: 'restaurantName',
-            value: 'Sushi Place'
-          }
-        });
+            id: 'restaurantName',
+            value: 'Sushi Place',
+          },
+        },
+      );
 
-      wrapper
-        .find('form')
-        .simulate('submit');
+      fireEvent.click(getByTestId('saveNewRestaurantButton'));
+      return wait();
     });
+
+    afterEach(cleanup);
 
     it('calls the onSave handler', () => {
       expect(saveHandler).toHaveBeenCalledWith('Sushi Place');
     });
 
     it('clears the text field', () => {
-      expect(
-        wrapper
-          .find('input[data-test="newRestaurantName"]')
-          .props().value,
-      ).toEqual('');
+      expect(getByTestId('newRestaurantName').value).toEqual('');
     });
   });
 });
-
-
-// it('', () => {});

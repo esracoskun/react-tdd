@@ -7,7 +7,7 @@ import {
 
 import { Formik } from "formik";
 
-export default function NewRestaurantForm({onSave}) {
+export default function NewRestaurantForm({onSave, onCancel}) {
   const nameInput = useRef(null);
 
   useEffect(() => {
@@ -16,8 +16,9 @@ export default function NewRestaurantForm({onSave}) {
     }
   }, []);
 
-  const handleSave = ({restaurantName, resetForm}) => {
+  const handleSave = ({ setStatus, restaurantName, resetForm }) => {
     onSave(restaurantName);
+    setStatus(false);
     resetForm();
   }
 
@@ -31,7 +32,12 @@ export default function NewRestaurantForm({onSave}) {
     return errors;
   }
 
-  const renderForm = ({ values, errors, handleChange, handleSubmit }) => (
+  const handleCancel = ({ resetForm }) => () => {
+    resetForm();
+    onCancel();
+  }
+
+  const renderForm = ({ values, errors, handleChange, handleSubmit, resetForm }) => (
     <form onSubmit={handleSubmit}>
       <Row>
         <Input
@@ -42,14 +48,21 @@ export default function NewRestaurantForm({onSave}) {
           error={errors.restaurantName}
           value={values.restaurantName}
           onChange={handleChange}
-          data-test="newRestaurantName"
+          data-testid="newRestaurantName"
           ref={nameInput}
         />
       </Row>
       <Row>
         <Button
+          type="button"
+          data-testid="cancelAddRestaurantButton"
+          onClick={handleCancel({ resetForm })}
+        >
+          Cancel
+        </Button>
+        <Button
           type="submit"
-          data-test="saveNewRestaurantButton" >
+          data-testid="saveNewRestaurantButton" >
           Save
         </Button>
       </Row>

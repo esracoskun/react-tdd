@@ -41421,7 +41421,8 @@ function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "functio
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function NewRestaurantForm(_ref) {
-  var onSave = _ref.onSave;
+  var onSave = _ref.onSave,
+      onCancel = _ref.onCancel;
   var nameInput = (0, _react.useRef)(null);
   (0, _react.useEffect)(function () {
     if (nameInput.current.input) {
@@ -41430,9 +41431,11 @@ function NewRestaurantForm(_ref) {
   }, []);
 
   var handleSave = function handleSave(_ref2) {
-    var restaurantName = _ref2.restaurantName,
+    var setStatus = _ref2.setStatus,
+        restaurantName = _ref2.restaurantName,
         resetForm = _ref2.resetForm;
     onSave(restaurantName);
+    setStatus(false);
     resetForm();
   };
 
@@ -41446,11 +41449,20 @@ function NewRestaurantForm(_ref) {
     return errors;
   };
 
-  var renderForm = function renderForm(_ref3) {
-    var values = _ref3.values,
-        errors = _ref3.errors,
-        handleChange = _ref3.handleChange,
-        handleSubmit = _ref3.handleSubmit;
+  var handleCancel = function handleCancel(_ref3) {
+    var resetForm = _ref3.resetForm;
+    return function () {
+      resetForm();
+      onCancel();
+    };
+  };
+
+  var renderForm = function renderForm(_ref4) {
+    var values = _ref4.values,
+        errors = _ref4.errors,
+        handleChange = _ref4.handleChange,
+        handleSubmit = _ref4.handleSubmit,
+        resetForm = _ref4.resetForm;
     return /*#__PURE__*/_react.default.createElement("form", {
       onSubmit: handleSubmit
     }, /*#__PURE__*/_react.default.createElement(_reactMaterialize.Row, null, /*#__PURE__*/_react.default.createElement(_reactMaterialize.Input, {
@@ -41461,11 +41473,17 @@ function NewRestaurantForm(_ref) {
       error: errors.restaurantName,
       value: values.restaurantName,
       onChange: handleChange,
-      "data-test": "newRestaurantName",
+      "data-testid": "newRestaurantName",
       ref: nameInput
     })), /*#__PURE__*/_react.default.createElement(_reactMaterialize.Row, null, /*#__PURE__*/_react.default.createElement(_reactMaterialize.Button, {
+      type: "button",
+      "data-testid": "cancelAddRestaurantButton",
+      onClick: handleCancel({
+        resetForm: resetForm
+      })
+    }, "Cancel"), /*#__PURE__*/_react.default.createElement(_reactMaterialize.Button, {
       type: "submit",
-      "data-test": "saveNewRestaurantButton"
+      "data-testid": "saveNewRestaurantButton"
     }, "Save")));
   };
 
@@ -42093,6 +42111,10 @@ function RestaurantListPage() {
     // setShowNewRestaurantForm(false);
     setRestaurantNames([newRestaurantName].concat(_toConsumableArray(restaurantNames)));
     $("#addRestaurantModal").modal("close");
+  };
+
+  var handleCancelAddRestaurant = function handleCancelAddRestaurant() {
+    $("#addRestaurantModal").modal("close");
   }; // const handleShowNewRestaurantForm = () => {
   //   setShowNewRestaurantForm(true);
   // }
@@ -42116,7 +42138,8 @@ function RestaurantListPage() {
 
     }, "Add Restaurant")
   }, /*#__PURE__*/_react.default.createElement(_NewRestaurantForm.default, {
-    onSave: handleAddRestaurant
+    onSave: handleAddRestaurant,
+    onCancel: handleCancelAddRestaurant
   })), /*#__PURE__*/_react.default.createElement(_reactMaterialize.Row, null, /*#__PURE__*/_react.default.createElement(_RestaurantList.default, {
     restaurantNames: restaurantNames
   })));
