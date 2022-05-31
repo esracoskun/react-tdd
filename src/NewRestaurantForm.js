@@ -2,10 +2,12 @@ import React, { useEffect, useRef, useState } from 'react';
 import {
   Button,
   Input,
-  Row
+  Row,
 } from 'react-materialize';
 
-export default function NewRestaurantForm({onSave}) {
+import { Formik } from "formik";
+
+export default function NewRestaurantForm({onSave, onCancel}) {
   const nameInput = useRef(null);
 
   useEffect(() => {
@@ -14,31 +16,66 @@ export default function NewRestaurantForm({onSave}) {
     }
   }, []);
 
-  const [inputText, setInputText] = useState('');
-
-  const handleTextChange = (event) => {
-    setInputText(event.target.value);
+  const handleSave = ({ setStatus, restaurantName, resetForm }) => {
+    onSave(restaurantName);
+    setStatus(false);
+    resetForm();
   }
 
-  const handleSave = () => {
-    onSave(inputText);
-    setInputText('');
+  const validate = (values) => {
+    let errors = {};
+
+    if (values.restaurantName === '') {
+      errors.restaurantName = 'Cannot be blank';
+    }
+
+    return errors;
   }
+
+  const handleCancel = ({ resetForm }) => () => {
+    resetForm();
+    onCancel();
+  }
+
+  const renderForm = ({ values, errors, handleChange, handleSubmit, resetForm }) => (
+    <form onSubmit={handleSubmit}>
+      <Row>
+        <Input
+          s={12}
+          label="Restaurant Name"
+          id="restaurantName"
+          name="restaurantName"
+          error={errors.restaurantName}
+          value={values.restaurantName}
+          onChange={handleChange}
+          data-testid="newRestaurantName"
+          ref={nameInput}
+        />
+      </Row>
+      <Row>
+        <Button
+          type="button"
+          data-testid="cancelAddRestaurantButton"
+          onClick={handleCancel({ resetForm })}
+        >
+          Cancel
+        </Button>
+        <Button
+          type="submit"
+          data-testid="saveNewRestaurantButton" >
+          Save
+        </Button>
+      </Row>
+    </form>
+  );
 
   return (
-    <Row>
-      <Input
-        s={12} m={8} l={10}
-        label='Restaurant Name'
-        value={inputText}
-        onChange={handleTextChange}
-        data-test="newRestaurantName"
-        ref={nameInput}
-      />
-
-      <Button s={12} m={4} l={2} data-test="saveNewRestaurantButton" onClick={handleSave}>
-        Save
-      </Button>
-    </Row>
+    <Formik
+      initialValues={{ restaurantName: '' }}
+      onSubmit={handleSave}
+      validate={validate}
+      >
+      {renderForm}
+    </Formik>
   );
 }

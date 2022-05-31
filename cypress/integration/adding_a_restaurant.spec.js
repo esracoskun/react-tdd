@@ -5,38 +5,78 @@ describe('adding a restaurant', () => {
 
     cy.visit('http://localhost:1234');
 
-    // modal not shown at the start
-    cy.get('[data-test="newRestaurantName"]')
-      .should('not.be.visible');
+    // modal allows adding restaurant
+    modalNotShownAtTheStart();
+    modalCanBeCancelled();
+    modalDisplaysValidationErrors();
+    modalClearsOutValidationErrorsWhenClosed();
+    modalAllowsAddingRestaurant(restaurantName);
+  });
 
-    // modal can be cancelled
+  function modalNotShownAtTheStart() {
+    cy.get('[data-testid="newRestaurantName"]')
+      .should('not.be.visible');
+  }
+
+  function modalCanBeCancelled() {
     cy.get('[data-test="addRestaurantButton"]')
       .click();
 
     cy.get('[data-test="addRestaurantModal"] button.modal-close')
       .click();
 
-    // modal allows adding restaurant
-    cy.get('[data-test="newRestaurantName"]')
+    cy.get('[data-testid="newRestaurantName"]')
       .should('not.be.visible');
+  }
+
+  function modalDisplaysValidationErrors() {
+    cy.get('[data-test="addRestaurantButton"]')
+      .click();
+
+    cy.get('[data-testid="saveNewRestaurantButton"]')
+      .click();
+
+    cy.get('label[for="restaurantName"][data-error="Cannot be blank"]')
+      .should("be.visible");
+
+    cy.get('[data-testid="cancelAddRestaurantButton"]').click();
+  }
+
+  function modalClearsOutValidationErrorsWhenClosed() {
+    cy.get('[data-test="addRestaurantButton"]')
+      .click();
+
+    cy.get('[data-testid="saveNewRestaurantButton"]')
+      .click();
+
+    cy.get('[data-testid="cancelAddRestaurantButton"]')
+      .click();
 
     cy.get('[data-test="addRestaurantButton"]')
       .click();
 
-    // modal focuses on text field when appears
-    cy.get('[data-test="newRestaurantName"]').focus();
+    cy.get('label[for="restaurantName"][data-error="Cannot be blank"]')
+      .should("not.be.visible");
 
-    cy.get('[data-test="newRestaurantName"]')
-      .type(restaurantName);
+    cy.get('[data-testid="cancelAddRestaurantButton"]')
+      .click();
+  }
 
-    cy.get('[data-test="saveNewRestaurantButton"]')
+  function modalAllowsAddingRestaurant(restaurantName) {
+    cy.get('[data-test="addRestaurantButton"]')
       .click();
 
+    cy.get('[data-testid="newRestaurantName"]').focus();
 
-    // confirm newRestaurantName field not shown
-    cy.get('[data-test="newRestaurantName"]')
+    cy.get('[data-testid="newRestaurantName"]')
+      .type(restaurantName);
+
+    cy.get('[data-testid="saveNewRestaurantButton"]')
+      .click();
+
+    cy.get('[data-testid="newRestaurantName"]')
       .should('not.be.visible');
 
     cy.contains(restaurantName);
-  });
+  }
 });

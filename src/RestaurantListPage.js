@@ -19,6 +19,10 @@ export default function RestaurantListPage() {
     $("#addRestaurantModal").modal("close");
   }
 
+  const handleCancelAddRestaurant = () => {
+    $("#addRestaurantModal").modal("close");
+  }
+
   // const handleShowNewRestaurantForm = () => {
   //   setShowNewRestaurantForm(true);
   // }
@@ -48,7 +52,7 @@ export default function RestaurantListPage() {
           </Button>
         }
         >
-        <NewRestaurantForm onSave={handleAddRestaurant}/>
+        <NewRestaurantForm onSave={handleAddRestaurant} onCancel={handleCancelAddRestaurant}/>
       </Modal>
       <Row>
         <RestaurantList restaurantNames={restaurantNames}/>
