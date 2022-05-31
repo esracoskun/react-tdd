@@ -35265,10 +35265,7 @@ function RestaurantListPage() {
     trigger: /*#__PURE__*/_react.default.createElement(_reactMaterialize.Button, {
       "data-test": "addRestaurantButton" // onClick={handleShowNewRestaurantForm}
 
-    }, "Add Restaurant") // actions={[
-    //   <Button flat modal="close" node="button" waves="green">Close</Button>
-    // ]}
-
+    }, "Add Restaurant")
   }, /*#__PURE__*/_react.default.createElement(_NewRestaurantForm.default, {
     onSave: handleAddRestaurant
   })), /*#__PURE__*/_react.default.createElement(_reactMaterialize.Row, null, /*#__PURE__*/_react.default.createElement(_RestaurantList.default, {
