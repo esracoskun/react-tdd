@@ -3,41 +3,64 @@ import {
   Button,
   Col,
   Row,
+  Modal,
 } from 'react-materialize';
 import NewRestaurantForm from './NewRestaurantForm';
 import RestaurantList from './RestaurantList';
 
 export default function RestaurantListPage() {
   const [restaurantNames, setRestaurantNames] = useState([]);
-  const [showNewRestaurantForm, setShowNewRestaurantForm] = useState(false);
+  // const [showNewRestaurantForm, setShowNewRestaurantForm] = useState(false);
 
   const handleAddRestaurant = (newRestaurantName) => {
-    setShowNewRestaurantForm(false);
+    // setShowNewRestaurantForm(false);
     setRestaurantNames([newRestaurantName, ...restaurantNames]);
-  };
+    $("#addRestaurantModal").modal("close");
+  }
 
-  const handleShowNewRestaurantForm = () => {
-    setShowNewRestaurantForm(true);
-  };
+  // const handleShowNewRestaurantForm = () => {
+  //   setShowNewRestaurantForm(true);
+  // }
 
-  const renderNewRestaurantForm = () => {
-    if (showNewRestaurantForm) {
-      return (<NewRestaurantForm
-        onSave={handleAddRestaurant}
-      />);
-    }
-  };
+  // const renderNewRestaurantForm = () => {
+  //   if (showNewRestaurantForm ) {
+  //     return (
+  //       <NewRestaurantForm
+  //         onSave={handleAddRestaurant}
+  //       />
+  //     )
+  //   }
+  // }
 
   return (
     <div>
-      <Row>
+      <Modal
+        id="addRestaurantModal"
+        header="New Restaurant"
+        trigger={
+          <Button
+            data-test="addRestaurantButton"
+            // onClick={handleShowNewRestaurantForm}
+          >
+            Add Restaurant
+          </Button>
+        } >
+        <NewRestaurantForm onSave={handleAddRestaurant}/>
+      </Modal>
+      {/* <Row>
         <Button data-test="addRestaurantButton" onClick={handleShowNewRestaurantForm}>
           Add Restaurant
         </Button>
       </Row>
       <Row>
-        { renderNewRestaurantForm() }
-      </Row>
+        {
+          showNewRestaurantForm ?
+          <NewRestaurantForm
+            onSave={handleAddRestaurant}
+          />
+          : null
+        }
+      </Row> */}
       <Row>
         <RestaurantList restaurantNames={restaurantNames}/>
       </Row>
