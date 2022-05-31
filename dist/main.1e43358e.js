@@ -34608,6 +34608,7 @@ function NewRestaurantForm(_ref) {
 
   var handleSave = function handleSave() {
     onSave(inputText);
+    setInputText('');
   };
 
   return /*#__PURE__*/_react.default.createElement(_reactMaterialize.Row, null, /*#__PURE__*/_react.default.createElement(_reactMaterialize.Input, {

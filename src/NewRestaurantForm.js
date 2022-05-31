@@ -22,6 +22,7 @@ export default function NewRestaurantForm({onSave}) {
 
   const handleSave = () => {
     onSave(inputText);
+    setInputText('');
   }
 
   return (
