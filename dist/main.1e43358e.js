@@ -41446,13 +41446,7 @@ function NewRestaurantForm(_ref) {
     return errors;
   };
 
-  return /*#__PURE__*/_react.default.createElement(_reactMaterialize.Row, null, /*#__PURE__*/_react.default.createElement(_formik.Formik, {
-    initialValues: {
-      restaurantName: ''
-    },
-    onSubmit: handleSave,
-    validate: validate
-  }, function (_ref3) {
+  var renderForm = function renderForm(_ref3) {
     var values = _ref3.values,
         errors = _ref3.errors,
         handleChange = _ref3.handleChange,
@@ -41472,12 +41466,21 @@ function NewRestaurantForm(_ref) {
       "data-test": "newRestaurantName",
       ref: nameInput
     }), /*#__PURE__*/_react.default.createElement(_reactMaterialize.Button, {
+      type: "submit",
       s: 12,
       m: 4,
       l: 2,
       "data-test": "saveNewRestaurantButton"
     }, "Save"));
-  }));
+  };
+
+  return /*#__PURE__*/_react.default.createElement(_reactMaterialize.Row, null, /*#__PURE__*/_react.default.createElement(_formik.Formik, {
+    initialValues: {
+      restaurantName: ''
+    },
+    onSubmit: handleSave,
+    validate: validate
+  }, renderForm));
 }
 },{"react":"node_modules/react/index.js","react-materialize":"node_modules/react-materialize/lib/index.js","formik":"node_modules/formik/dist/formik.esm.js"}],"node_modules/blob-util/dist/blob-util.es.js":[function(require,module,exports) {
 "use strict";
