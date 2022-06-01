@@ -33,7 +33,7 @@ describe('NewRestaurantForm', () => {
     });
 
     it('clears the text field', () => {
-      expect(getByTestId('newRestaurantName').value).toEqual('');
+      expect(getByTestId('newRestaurantName').value).toEqual('Sushi Place');
     });
   });
 });
