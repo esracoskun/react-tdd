@@ -45092,12 +45092,13 @@ function NewRestaurantForm(_ref) {
     if (nameInput.current.input) {
       nameInput.current.input.focus();
     }
-  }, []); // const handleSave = ({ setStatus, restaurantName, resetForm }) => {
+  }, []);
 
-  var handleSave = function handleSave(_ref2) {
-    var restaurantName = _ref2.restaurantName;
-    onSave(restaurantName); // setStatus(false);
-    // resetForm();
+  var handleSave = function handleSave(values, _ref2) {
+    var resetForm = _ref2.resetForm;
+    var restaurantName = values.restaurantName;
+    onSave(restaurantName);
+    resetForm();
   };
 
   var validate = function validate(values) {
@@ -45682,6 +45683,8 @@ var _blobUtil = require("blob-util");
 
 var _reactMaterialize = require("react-materialize");
 
+var _reactRouterDom = require("react-router-dom");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var RestaurantList = function RestaurantList(_ref) {
@@ -45713,13 +45716,15 @@ var SomeRestaurantList = function SomeRestaurantList(_ref3) {
   return restaurantNames.map(function (restaurantName) {
     return /*#__PURE__*/_react.default.createElement(_reactMaterialize.CollectionItem, {
       key: restaurantName
-    }, restaurantName);
+    }, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
+      to: "/restaurants/".concat(restaurantName)
+    }, restaurantName));
   });
 };
 
 var _default = RestaurantList;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","blob-util":"node_modules/blob-util/dist/blob-util.es.js","react-materialize":"node_modules/react-materialize/lib/index.js"}],"src/RestaurantListPage.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","blob-util":"node_modules/blob-util/dist/blob-util.es.js","react-materialize":"node_modules/react-materialize/lib/index.js","react-router-dom":"node_modules/react-router-dom/es/index.js"}],"src/RestaurantListPage.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -45765,37 +45770,22 @@ function RestaurantListPage() {
   var _useState = (0, _react.useState)([]),
       _useState2 = _slicedToArray(_useState, 2),
       restaurantNames = _useState2[0],
-      setRestaurantNames = _useState2[1]; // const [showNewRestaurantForm, setShowNewRestaurantForm] = useState(false);
-
+      setRestaurantNames = _useState2[1];
 
   var handleAddRestaurant = function handleAddRestaurant(newRestaurantName) {
-    // setShowNewRestaurantForm(false);
     setRestaurantNames([newRestaurantName].concat(_toConsumableArray(restaurantNames)));
     $("#addRestaurantModal").modal("close");
   };
 
   var handleCancelAddRestaurant = function handleCancelAddRestaurant() {
     $("#addRestaurantModal").modal("close");
-  }; // const handleShowNewRestaurantForm = () => {
-  //   setShowNewRestaurantForm(true);
-  // }
-  // const renderNewRestaurantForm = () => {
-  //   if (showNewRestaurantForm ) {
-  //     return (
-  //       <NewRestaurantForm
-  //         onSave={handleAddRestaurant}
-  //       />
-  //     )
-  //   }
-  // }
-
+  };
 
   return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_reactMaterialize.Modal, {
     id: "addRestaurantModal",
     header: "New Restaurant",
     trigger: /*#__PURE__*/_react.default.createElement(_reactMaterialize.Button, {
-      "data-testid": "addRestaurantButton" // onClick={handleShowNewRestaurantForm}
-
+      "data-testid": "addRestaurantButton"
     }, "Add Restaurant")
   }, /*#__PURE__*/_react.default.createElement(_NewRestaurantForm.default, {
     onSave: handleAddRestaurant,
@@ -45804,7 +45794,172 @@ function RestaurantListPage() {
     restaurantNames: restaurantNames
   })));
 }
-},{"react":"node_modules/react/index.js","react-materialize":"node_modules/react-materialize/lib/index.js","./NewRestaurantForm":"src/NewRestaurantForm.js","./RestaurantList":"src/RestaurantList.js"}],"src/App.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","react-materialize":"node_modules/react-materialize/lib/index.js","./NewRestaurantForm":"src/NewRestaurantForm.js","./RestaurantList":"src/RestaurantList.js"}],"src/DishList.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _reactMaterialize = require("react-materialize");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var DishList = function DishList(_ref) {
+  var dishNames = _ref.dishNames;
+  return /*#__PURE__*/_react.default.createElement(_reactMaterialize.Collection, {
+    header: "Dishes"
+  }, /*#__PURE__*/_react.default.createElement(DishItems, {
+    dishNames: dishNames
+  }));
+};
+
+var DishItems = function DishItems(_ref2) {
+  var dishNames = _ref2.dishNames;
+  return dishNames.length === 0 ? /*#__PURE__*/_react.default.createElement(NoDishItems, null) : /*#__PURE__*/_react.default.createElement(SomeDishList, {
+    dishNames: dishNames
+  });
+};
+
+var NoDishItems = function NoDishItems() {
+  return /*#__PURE__*/_react.default.createElement(_reactMaterialize.CollectionItem, {
+    style: {
+      color: 'gray'
+    }
+  }, "(Non added Yet)");
+};
+
+var SomeDishList = function SomeDishList(_ref3) {
+  var dishNames = _ref3.dishNames;
+  return dishNames.map(function (dishName) {
+    return /*#__PURE__*/_react.default.createElement(_reactMaterialize.CollectionItem, {
+      key: dishName
+    }, dishName);
+  });
+};
+
+var _default = DishList;
+exports.default = _default;
+},{"react":"node_modules/react/index.js","react-materialize":"node_modules/react-materialize/lib/index.js"}],"src/NewDishForm.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = NewDishForm;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _reactMaterialize = require("react-materialize");
+
+var _formik = require("formik");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function NewDishForm(_ref) {
+  var onSave = _ref.onSave;
+
+  var handleSave = function handleSave(_ref2) {
+    var dishName = _ref2.dishName;
+    onSave(dishName);
+  };
+
+  var renderForm = function renderForm(_ref3) {
+    var values = _ref3.values,
+        handleChange = _ref3.handleChange,
+        handleSubmit = _ref3.handleSubmit;
+    return /*#__PURE__*/_react.default.createElement("form", {
+      onSubmit: handleSubmit
+    }, /*#__PURE__*/_react.default.createElement(_reactMaterialize.Row, null, /*#__PURE__*/_react.default.createElement(_reactMaterialize.Input, {
+      s: 12,
+      label: "Dish Name",
+      id: "dishName",
+      value: values.dishName,
+      onChange: handleChange,
+      "data-testid": "newDishName"
+    })), /*#__PURE__*/_react.default.createElement(_reactMaterialize.Row, null, /*#__PURE__*/_react.default.createElement(_reactMaterialize.Button, {
+      type: "submit",
+      "data-testid": "saveNewDishButton"
+    }, "Save")));
+  };
+
+  return /*#__PURE__*/_react.default.createElement(_formik.Formik, {
+    initialValues: {
+      dishName: ''
+    },
+    onSubmit: handleSave
+  }, renderForm);
+}
+},{"react":"node_modules/react/index.js","react-materialize":"node_modules/react-materialize/lib/index.js","formik":"node_modules/formik/dist/formik.esm.js"}],"src/RestaurantDetailPage.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = RestaurantDetailPage;
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _reactMaterialize = require("react-materialize");
+
+var _DishList = _interopRequireDefault(require("./DishList"));
+
+var _NewDishForm = _interopRequireDefault(require("./NewDishForm"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function RestaurantDetailPage() {
+  var _useState = (0, _react.useState)([]),
+      _useState2 = _slicedToArray(_useState, 2),
+      dishName = _useState2[0],
+      setDishName = _useState2[1];
+
+  var handleAddDish = function handleAddDish(newDishName) {
+    setDishName([newDishName].concat(_toConsumableArray(dishName)));
+    $("#addDishModal").modal("close");
+  };
+
+  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_reactMaterialize.Modal, {
+    id: "addDishModal",
+    header: "New Dish",
+    actions: [],
+    trigger: /*#__PURE__*/_react.default.createElement(_reactMaterialize.Button, {
+      "data-testid": "addDishButton"
+    }, "Add Dish")
+  }, /*#__PURE__*/_react.default.createElement(_NewDishForm.default, {
+    onSave: handleAddDish
+  })), /*#__PURE__*/_react.default.createElement(_reactMaterialize.Row, null, /*#__PURE__*/_react.default.createElement(_DishList.default, {
+    dishNames: dishName
+  })));
+}
+},{"react":"node_modules/react/index.js","react-materialize":"node_modules/react-materialize/lib/index.js","./DishList":"src/DishList.js","./NewDishForm":"src/NewDishForm.js"}],"src/App.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -45820,6 +45975,8 @@ var _reactMaterialize = require("react-materialize");
 
 var _RestaurantListPage = _interopRequireDefault(require("./RestaurantListPage"));
 
+var _RestaurantDetailPage = _interopRequireDefault(require("./RestaurantDetailPage"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function App() {
@@ -45832,9 +45989,12 @@ function App() {
     path: "/",
     exact: true,
     component: _RestaurantListPage.default
+  }), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
+    path: "/restaurants/:name",
+    component: _RestaurantDetailPage.default
   }))));
 }
-},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/es/index.js","react-materialize":"node_modules/react-materialize/lib/index.js","./RestaurantListPage":"src/RestaurantListPage.js"}],"src/main.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/es/index.js","react-materialize":"node_modules/react-materialize/lib/index.js","./RestaurantListPage":"src/RestaurantListPage.js","./RestaurantDetailPage":"src/RestaurantDetailPage.js"}],"src/main.js":[function(require,module,exports) {
 "use strict";
 
 var _react = _interopRequireDefault(require("react"));
@@ -45875,7 +46035,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57502" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58908" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

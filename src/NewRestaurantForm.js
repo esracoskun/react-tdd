@@ -16,11 +16,11 @@ export default function NewRestaurantForm({onSave, onCancel}) {
     }
   }, []);
 
-  // const handleSave = ({ setStatus, restaurantName, resetForm }) => {
-  const handleSave = ({ restaurantName }) => {
+  const handleSave = (values, {resetForm}) => {
+    const { restaurantName } = values;
+
     onSave(restaurantName);
-    // setStatus(false);
-    // resetForm();
+    resetForm();
   }
 
   const validate = (values) => {

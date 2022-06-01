@@ -11,10 +11,8 @@ import RestaurantList from './RestaurantList';
 export default function RestaurantListPage() {
 
   const [restaurantNames, setRestaurantNames] = useState([]);
-  // const [showNewRestaurantForm, setShowNewRestaurantForm] = useState(false);
 
   const handleAddRestaurant = (newRestaurantName) => {
-    // setShowNewRestaurantForm(false);
     setRestaurantNames([newRestaurantName, ...restaurantNames]);
     $("#addRestaurantModal").modal("close");
   }
@@ -23,30 +21,13 @@ export default function RestaurantListPage() {
     $("#addRestaurantModal").modal("close");
   }
 
-  // const handleShowNewRestaurantForm = () => {
-  //   setShowNewRestaurantForm(true);
-  // }
-
-  // const renderNewRestaurantForm = () => {
-  //   if (showNewRestaurantForm ) {
-  //     return (
-  //       <NewRestaurantForm
-  //         onSave={handleAddRestaurant}
-  //       />
-  //     )
-  //   }
-  // }
-
   return (
     <div>
       <Modal
         id="addRestaurantModal"
         header="New Restaurant"
         trigger={
-          <Button
-            data-testid="addRestaurantButton"
-            // onClick={handleShowNewRestaurantForm}
-          >
+          <Button data-testid="addRestaurantButton">
             Add Restaurant
           </Button>
         }
