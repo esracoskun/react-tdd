@@ -22,8 +22,7 @@ jobs:
           # cache NPM modules and the folder with the Cypress binary
           paths:
             - ~/.cache ## cache both yarn and cypress!
-      - run: npm install -g wait-on
-      - run: yarn start & wait-on http://localhost:1234
-      - run: bin/cypress
       - run: yarn unit
       - run: yarn lint
+      - run: npm install -g wait-on
+      - run: bin/cypress
