@@ -41,12 +41,11 @@ export default function RestaurantListPage() {
     <div>
       <Modal
         id="addRestaurantModal"
-        data-test="addRestaurantModal"
         header="New Restaurant"
         trigger={
           <Button
-          data-test="addRestaurantButton"
-          // onClick={handleShowNewRestaurantForm}
+            data-testid="addRestaurantButton"
+            // onClick={handleShowNewRestaurantForm}
           >
             Add Restaurant
           </Button>

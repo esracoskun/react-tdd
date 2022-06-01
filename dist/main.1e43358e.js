@@ -42131,10 +42131,9 @@ function RestaurantListPage() {
 
   return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_reactMaterialize.Modal, {
     id: "addRestaurantModal",
-    "data-test": "addRestaurantModal",
     header: "New Restaurant",
     trigger: /*#__PURE__*/_react.default.createElement(_reactMaterialize.Button, {
-      "data-test": "addRestaurantButton" // onClick={handleShowNewRestaurantForm}
+      "data-testid": "addRestaurantButton" // onClick={handleShowNewRestaurantForm}
 
     }, "Add Restaurant")
   }, /*#__PURE__*/_react.default.createElement(_NewRestaurantForm.default, {
@@ -42209,7 +42208,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64748" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56294" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
